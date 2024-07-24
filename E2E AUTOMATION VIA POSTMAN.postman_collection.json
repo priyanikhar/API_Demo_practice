@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "96a6fb3c-d269-434e-9bae-3dd0060fe813",
+		"name": "E2E AUTOMATION VIA POSTMAN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12993196"
+	},
+	"item": [
+		{
+			"name": "Step 1- Create Booking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Set up the bookingid\",function()\r",
+							"{\r",
+							"\r",
+							"var resposeData=pm.response.json()\r",
+							"var bookingid=resposeData[\"bookingid\"]\r",
+							"pm.environment.set(\"bookingid\",bookingid);\r",
+							"\r",
+							"\r",
+							" })\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"firstname\": \"Niya\",\r\n    \"lastname\": \"Nikhar\",\r\n    \"totalprice\": 250,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2024-07-22\",\r\n        \"checkout\": \"2024-07-25\"\r\n    },\r\n    \"additionalneeds\": \"breakfast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/booking/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"booking",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step 2- Update booking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status is 200\")\r",
+							"{\r",
+							"    pm.response.to.have.status(200);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "Aplication/json",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "token=<\"b75cb0928aebf75\">",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"Tapan\",\r\n    \"lastname\": \"Nikhar\",\r\n    \"totalprice\": 250,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2024-07-20\",\r\n        \"checkout\": \"2024-07-22\"\r\n    },\r\n    \"additionalneeds\": \"breakfast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking/3060\n",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking",
+						"3060\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step 3- Get all booking by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking/1705",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking",
+						"1705"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
